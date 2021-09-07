@@ -62,7 +62,7 @@ if(!empty($_POST)){
 </html>
 ';
 			 mail(
-			    'petryakov.mihail@b-leader.ru',
+			    'join@ecwid.com',
 			   	'Тестовое задание',
 			    $message,
 			    $headers,
