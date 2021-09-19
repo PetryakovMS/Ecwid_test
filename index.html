@@ -135,7 +135,7 @@
 				</div>
 				<div class="right_column">
 					<input class="fields2fill" type="date" name="date"><br>
-					<span class='alert_text date'>Заполните дату</span>
+					<span class='alert_text date'>Неверная дата</span>
 				</div>
 			</div>
 			<div class="form_line">
@@ -144,7 +144,7 @@
 				</div>
 				<div class="right_column">
 					<input class="fields2fill" type="email" name="mail"><br>
-					<span class='alert_text mail'>Заполните почту</span>
+					<span class='alert_text mail'>Неверный адрес почты</span>
 				</div>
 			</div>
 			<div class="form_line">
@@ -210,23 +210,46 @@
 	            valid = false;
 	        }
 
+	       
+
 	        if (form.date.value.length === 0){
 				form.date.classList.add('alert');
 				form.getElementsByClassName('date')['0'].classList.add('visibility');
 	            valid = false;
+	        } else {
+	        	var d_arr = form.date.value.split('-');
+				var d = new Date(d_arr[0]+'/'+d_arr[1]+'/'+d_arr[2]+''); // дата в формате 2014/12/31
+				if (Number(d_arr[0])!=d.getFullYear() || Number(d_arr[1])!=(d.getMonth() + 1) || Number(d_arr[2])!=d.getDate()) {
+				  	form.date.classList.add('alert');
+					form.getElementsByClassName('date')['0'].classList.add('visibility');
+		            valid = false;
+				};
+
+				var currentTime = new Date();
+
+				if(currentTime < d){
+					form.date.classList.add('alert');
+					form.getElementsByClassName('date')['0'].classList.add('visibility');
+		            valid = false;
+				}
+	
 	        }
 
-	        if (form.mail.value.length === 0){
-				form.mail.classList.add('alert');
+	        var re = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+
+	        if(re.test(form.mail.value) == false) {
+	        	form.mail.classList.add('alert');
 				form.getElementsByClassName('mail')['0'].classList.add('visibility');
 	            valid = false;
+		
 	        }
 
 	        if (form.text.value.length === 0){
 				form.text.classList.add('text');
-				form.getElementsByClassName('name')['0'].classList.add('visibility');
+				form.getElementsByClassName('text')['0'].classList.add('visibility');
 	            valid = false;
 	        }
+
 
 	    	if(valid){
 	    		event.preventDefault();
