@@ -244,8 +244,10 @@
 		
 	        }
 
+	        console.log(form.text.value.length);
+
 	        if (form.text.value.length === 0){
-				form.text.classList.add('text');
+				form.text.classList.add('alert');
 				form.getElementsByClassName('text')['0'].classList.add('visibility');
 	            valid = false;
 	        }
